@@ -11,27 +11,26 @@ let todoItems = [
     "bananas"
 ];
 
-
-
 // 2. Create variables for each interactive DOM element
-const addItemButton = document.getElementById('add-item-button');
 // add more variables below
-const itemInput = document.getElementById('item-input');
-const sortBtn = document.getElementById('sort-button');
-const clearBtn = document.getElementById('clear-button');
+const addItemButton = document.getElementById('add-item-button');
+const sortBtn = document.getElementById('sort');
+const clearBtn = document.getElementById('clear');
 const list = document.getElementById('list');
-
+const textInput = document.getElementById('text');
 
 
 // 3. Write a function to display all items in the #list element
 function updateList() {
+    // clear list before adding new items
+    list.innerHTML = '';
     // add your code here
-    list.innerHTML = "";
-    todoItems.forEach(function (item) {
-        const li = document.createElement("li");
-        li.textContent = item;
+    for (let i = 0; i < todoItems.length; i++) {
+        const li = document.createElement('li');
+        li.innerText = todoItems[i];
+
         list.appendChild(li);
-    });
+    }
 }
 
 updateList();
@@ -41,12 +40,15 @@ updateList();
 // 4. Handle adding a new item when the form is submitted
 addItemButton.addEventListener('click', function () {
     // add your code here
-    const newItem = itemInput.value.trim();
-    if (newItem !== "") {
-        todoItems.push(newItem);
-        itemInput.value = "";
-        updateList();
-    }
+    // 4a. when the user clicks the "Add" button, check whats in the input and store it in a variable
+    const newItemText = textInput.value;
+    // console.log(newItemText);
+
+    // 4b. add the new item to the array
+    todoItems.push(newItemText);
+    updateList();
+    // console.log(todoItems);
+    textInput.value = "";
 });
 
 
@@ -54,7 +56,8 @@ addItemButton.addEventListener('click', function () {
 
 // 5. Sort items alphabetically when sortBtn is clicked
 sortBtn.addEventListener("click", () => {
-    // add your code here
+    // add your code here\
+    // console.log('sort button clicked')
     todoItems.sort();
     updateList();
 });
@@ -69,8 +72,8 @@ clearBtn.addEventListener("click", () => {
     updateList();
 });
 
-console.log(addItemButton);
-console.log(itemInput);
-console.log(sortBtn);
-console.log(clearBtn);
-console.log(list);
+// console.log(addItemButton);
+// console.log(itemInput);
+// console.log(sortBtn);
+// console.log(clearBtn);
+// console.log(list);
